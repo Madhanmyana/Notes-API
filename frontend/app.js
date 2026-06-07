@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://notes-api-mls1.onrender.com';
+const API_BASE_URL = 'https://notes-api-mlsl.onrender.com';
 
 // DOM Elements
 const notesListContainer = document.getElementById('notes-list-container');
