@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A minimal, simple static single-page notes application.">
+    <title>Notes</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar: Notes List -->
+        <aside class="sidebar">
+            <header class="sidebar-header">
+                <h1>Notes</h1>
+                <button id="btn-new-note" class="btn btn-primary" title="Create a new note">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    <span>New Note</span>
+                </button>
+            </header>
+            
+            <div id="notes-list-container" class="notes-list">
+                <!-- Loading State -->
+                <div class="loading-state">Loading notes...</div>
+                <!-- Notes will be injected here dynamically -->
+            </div>
+        </aside>
+
+        <!-- Main Content Area: Editor / View -->
+        <main class="main-content">
+            <!-- Empty State / No Note Selected -->
+            <div id="empty-state" class="empty-state">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="empty-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <p>Select a note to read or create a new one.</p>
+            </div>
+
+            <!-- Note Detail & Editor Form -->
+            <section id="editor-container" class="editor-container hidden">
+                <form id="note-form" class="note-form">
+                    <input type="hidden" id="note-id">
+                    
+                    <div class="form-header">
+                        <span id="note-mode-badge" class="mode-badge">New Note</span>
+                        <div class="header-actions">
+                            <button type="button" id="btn-delete" class="btn btn-danger hidden" title="Delete note">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                <span>Delete</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group title-group">
+                        <input type="text" id="note-title" placeholder="Title" required minlength="3" maxlength="100" autocomplete="off">
+                    </div>
+
+                    <div class="form-group metadata-group">
+                        <span id="note-created-at" class="note-date"></span>
+                    </div>
+
+                    <div class="form-group content-group">
+                        <textarea id="note-content" placeholder="Start writing (minimum 10 characters)..." required minlength="10" maxlength="1000"></textarea>
+                    </div>
+
+                    <footer class="form-footer">
+                        <div id="validation-error" class="error-message hidden"></div>
+                        <div class="footer-actions">
+                            <button type="button" id="btn-cancel" class="btn btn-secondary">Cancel</button>
+                            <button type="submit" id="btn-save" class="btn btn-primary">Save Note</button>
+                        </div>
+                    </footer>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
